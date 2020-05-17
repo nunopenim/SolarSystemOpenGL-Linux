@@ -1,2 +1,4 @@
 # SolarSystemOpenGL
-Solar System Rendering with OpenGL
+Projeto de computação gráfica.
+
+A decorrer!
