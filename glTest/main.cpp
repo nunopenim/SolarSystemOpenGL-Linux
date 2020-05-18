@@ -115,6 +115,8 @@ int main()
 
 	float orbitSpeed = 100000.0f;
 
+	float gasSpecial = 10.0f;
+
 	//escala reduzida a distanceSunScale * daySpeed vezes
 	float distanceSunScale = 10.0f;
 	float daySpeed = 1000000.0f;
@@ -215,22 +217,22 @@ int main()
 
 	jupiter.shift(0.0f, 0.0f, 779.0f / distanceSunScale + sunRadius + jupiterRadius);
 	jupiter.rotate(3.1f);
-	jupiter.orbitSpeed(360 / timeToSeconds(4332.59f, 0, 0, 0) * orbitSpeed);
+	jupiter.orbitSpeed(360 / timeToSeconds(4332.59f, 0, 0, 0) * orbitSpeed * gasSpecial);
 	jupiter.rotationSpeed(360 / timeToSeconds(0.0f, 9.0f, 55.0f, 30.0f) * orbitSpeed);
 
 	saturn.shift(0.0f, 0.0f, 1430.0f / distanceSunScale + sunRadius + saturnRadius);
 	saturn.rotate(-26.7f);
-	saturn.orbitSpeed(360 / timeToSeconds(10759.0f, 0, 0, 0) * orbitSpeed);
+	saturn.orbitSpeed(360 / timeToSeconds(10759.0f, 0, 0, 0) * orbitSpeed * gasSpecial);
 	saturn.rotationSpeed(360 / timeToSeconds(0.0f, 10.0f, 33.0f, 0.0f) * orbitSpeed);
 
 	uranus.shift(0.0f, 0.0f, 2880.0f / distanceSunScale + sunRadius + uranusRadius);
 	uranus.rotate(97.8f);
-	uranus.orbitSpeed(360 / timeToSeconds(30688.5f, 0, 0, 0) * orbitSpeed);
+	uranus.orbitSpeed(360 / timeToSeconds(30688.5f, 0, 0, 0) * orbitSpeed * gasSpecial);
 	uranus.rotationSpeed(360 / timeToSeconds(0.0f, 17.0f, 14.0f, 24.0f) * orbitSpeed);
 
 	neptune.shift(0.0f, 0.0f, 4500.0f / distanceSunScale + sunRadius + neptuneRadius);
 	neptune.rotate(28.3f);
-	neptune.orbitSpeed(360 / timeToSeconds(60182.0f, 0.0f, 0.0f, 0.0f) * orbitSpeed);
+	neptune.orbitSpeed(360 / timeToSeconds(60182.0f, 0.0f, 0.0f, 0.0f) * orbitSpeed * gasSpecial);
 	neptune.rotationSpeed(360 / timeToSeconds(0.0f, 16.0f, 6.0f, 36.0f) * orbitSpeed);
 
 	spheres.push_back(sun);
@@ -251,7 +253,7 @@ int main()
 
 	satRings.shift(0.0f, 0.0f, 1430.0f / distanceSunScale + sunRadius + saturnRadius);
 	satRings.rotate(-26.7f - 60.0f);
-	satRings.orbitSpeed(360 / timeToSeconds(10759.0f, 0, 0, 0) * orbitSpeed);
+	satRings.orbitSpeed(360 / timeToSeconds(10759.0f, 0, 0, 0) * orbitSpeed * gasSpecial);
 	satRings.rotationSpeed(0.0f);
 
 	rings.push_back(satRings);
