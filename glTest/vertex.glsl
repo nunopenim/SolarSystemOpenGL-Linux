@@ -7,7 +7,6 @@ out vec3 interpolatedNormal;
 out vec2 st;
 
 uniform mat4 model;
-//uniform mat4 projectionView;
 uniform mat4 view;
 uniform mat4 projection;
 
