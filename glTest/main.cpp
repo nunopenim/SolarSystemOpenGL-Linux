@@ -6,7 +6,7 @@
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
-//#include "Cube.hpp"
+
 #include "camera.hpp"
 #include "Sphere.hpp"
 #include "Ring.hpp"
@@ -248,7 +248,7 @@ int main()
 	spheres.push_back(box);
 
 	// Saturn (and possibly uranus too) rings
-	Ring satRings(saturnRadius + 9.8f, 50, 50, saturnRingPath); //9,8 a mais
+	Ring satRings(saturnRadius + 9.8f, 50, 50, saturnRingPath); //9,8 a mais, de acordo com as minhas contas
 	satRings.useShader("vertex.GLSL", "frag.GLSL");
 
 	satRings.shift(0.0f, 0.0f, 1430.0f / distanceSunScale + sunRadius + saturnRadius);
