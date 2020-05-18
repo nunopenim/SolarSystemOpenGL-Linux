@@ -164,14 +164,22 @@
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="brick.jpg" />
-    <Image Include="test.jpg" />
+    <None Include="frag.glsl" />
+    <None Include="vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="frag.glsl" />
-    <None Include="fragment.fs" />
-    <None Include="vertex.glsl" />
-    <None Include="vertex.vs" />
+    <Image Include="textures\box.jpg" />
+    <Image Include="textures\earth.jpg" />
+    <Image Include="textures\jupiter.jpg" />
+    <Image Include="textures\mars.jpg" />
+    <Image Include="textures\mercury.jpg" />
+    <Image Include="textures\moon.jpg" />
+    <Image Include="textures\neptune.jpg" />
+    <Image Include="textures\ring.jpg" />
+    <Image Include="textures\saturn.jpg" />
+    <Image Include="textures\sun.jpg" />
+    <Image Include="textures\uranus.jpg" />
+    <Image Include="textures\venus.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
