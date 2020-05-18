@@ -160,7 +160,6 @@
     <ClInclude Include="global.h" />
     <ClInclude Include="Ring.hpp" />
     <ClInclude Include="Shader.hh" />
-    <ClInclude Include="Shader.hpp" />
     <ClInclude Include="Sphere.hpp" />
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
