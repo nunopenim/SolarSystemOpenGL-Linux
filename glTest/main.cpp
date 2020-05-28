@@ -119,7 +119,7 @@ int main()
 
 	//escala reduzida a distanceSunScale * daySpeed vezes
 	float distanceSunScale = 10.0f;
-	float daySpeed = 1000000.0f;
+	//float daySpeed = 1000000.0f;
 
 	float sunRadius = 20.0f * scale;
 	float mercuryRadius = 0.4f * scale;
