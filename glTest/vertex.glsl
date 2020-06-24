@@ -17,15 +17,10 @@ out vec3 P;
 
 void main()
 {
-
-    
     gl_Position = projection * view * model * vec4(Position, 1.0);
     P = vec3(view * model * vec4(Position, 1.0));
-   
-
     interpolatedNormal = mat3(transpose(inverse(view * model))) * Normal;
     st = TexCoord; // Will also be interpolated across the triangle
-
     vec3 lightLocation = vec3(1.0,1.0,1.0);
 
     lightPos = vec3(view * vec4(lightLocation, 1.0));
