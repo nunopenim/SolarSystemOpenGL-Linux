@@ -37,6 +37,7 @@
   <ItemGroup>
     <None Include="frag.glsl" />
     <None Include="vertex.glsl" />
+    <None Include="phongFrag.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

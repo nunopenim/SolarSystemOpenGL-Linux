@@ -165,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="frag.glsl" />
+    <None Include="phongFrag.glsl" />
     <None Include="vertex.glsl" />
   </ItemGroup>
   <ItemGroup>

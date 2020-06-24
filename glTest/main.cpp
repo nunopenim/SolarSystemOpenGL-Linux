@@ -33,6 +33,11 @@ float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
 
+float scale = 1.0f;
+
+float boxRadius = 700.0f * scale;
+float skyLimit = sqrt((boxRadius * boxRadius) / 2) - 10;
+
 int main()
 {
 	//************************** CONTEXT **********************************
@@ -48,7 +53,9 @@ int main()
 
 
 	// Open a window and create its OpenGL context
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Solar System - Nuno Penim 21700874 e Paulo Oliveira 21802287", NULL, NULL);
+	//GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Solar System - Nuno Penim 21700874 e Paulo Oliveira 21802287", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Solar System - Nuno Penim 21700874", NULL, NULL);
+	//GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "transf", NULL, NULL);
 	glfwMakeContextCurrent(window);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
@@ -111,7 +118,7 @@ int main()
 
 	float PI = M_PI;
 
-	float scale = 1.0f;
+	
 
 	float orbitSpeed = 100000.0f;
 
@@ -119,7 +126,7 @@ int main()
 
 	//escala reduzida a distanceSunScale * daySpeed vezes
 	float distanceSunScale = 10.0f;
-	//float daySpeed = 1000000.0f;
+	float daySpeed = 1000000.0f;
 
 	float sunRadius = 20.0f * scale;
 	float mercuryRadius = 0.4f * scale;
@@ -131,8 +138,6 @@ int main()
 	float saturnRadius = 9.46f * scale;
 	float uranusRadius = 4.06f * scale;
 	float neptuneRadius = 3.88f * scale;
-
-	float boxRadius = 500.0f * scale;
 
 	const char* sunPath = "textures/sun.jpg";
 	const char* mercuryPath = "textures/mercury.jpg";
@@ -147,7 +152,7 @@ int main()
 	const char* saturnRingPath = "textures/ring.jpg";
 
 	const char* boxPath = "textures/box.jpg";
-
+	
 
 	Sphere sun(sunRadius, 50, 50, sunPath);
 	sun.useShader("vertex.GLSL", "frag.GLSL");
@@ -262,6 +267,10 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_2D);
 	while (!glfwWindowShouldClose(window)) {
+		glm::vec3 lightPos = glm::vec3(0.0f, 1.0f, 0.0f);
+		
+		glUniform3f(glGetUniformLocation(jupiter.shader.ID,"rotationS"), lightPos.x, lightPos.y, lightPos.z);
+
 		float currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
@@ -308,6 +317,25 @@ void processInput(GLFWwindow* window)
 		camera.ProcessKeyboard(LEFT, deltaTime * speed);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera.ProcessKeyboard(RIGHT, deltaTime * speed);
+
+	if (camera.Position.x > skyLimit) {
+		camera.Position.x = skyLimit;
+	}
+	if (camera.Position.x < -skyLimit) {
+		camera.Position.x = -skyLimit;
+	}
+	if (camera.Position.y > skyLimit) {
+		camera.Position.y = skyLimit;
+	}
+	if (camera.Position.y < -skyLimit) {
+		camera.Position.y = -skyLimit;
+	}
+	if (camera.Position.z > skyLimit) {
+		camera.Position.z = skyLimit;
+	}
+	if (camera.Position.z < -skyLimit) {
+		camera.Position.z = -skyLimit;
+	}
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
