@@ -36,7 +36,7 @@ bool firstMouse = true;
 float scale = 1.0f;
 
 float boxRadius = 700.0f * scale;
-float skyLimit = sqrt((boxRadius * boxRadius) / 2) - 10;
+float skyLimit = sqrt((boxRadius * boxRadius) / 2) - 5;
 
 int main()
 {
