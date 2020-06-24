@@ -158,31 +158,31 @@ int main()
 	sun.useShader("vertex.GLSL", "frag.GLSL");
 
 	Sphere mercury(mercuryRadius, 50, 50, mercuryPath);
-	mercury.useShader("vertex.GLSL", "frag.GLSL");
+	mercury.useShader("vertex.GLSL", "phongFrag.GLSL");
 
 	Sphere venus(venusRadius, 50, 50, venusPath);
-	venus.useShader("vertex.GLSL", "frag.GLSL");
+	venus.useShader("vertex.GLSL", "phongFrag.GLSL");
 
 	Sphere earth(earthRadius, 50, 50, earthPath);
-	earth.useShader("vertex.GLSL", "frag.GLSL");
+	earth.useShader("vertex.GLSL", "phongFrag.GLSL");
 
 	Sphere moon(moonRadius, 50, 50, moonPath);
-	moon.useShader("vertex.GLSL", "frag.GLSL");
+	moon.useShader("vertex.GLSL", "phongFrag.GLSL");
 	
 	Sphere mars(marsRadius, 50, 50, marsPath);
-	mars.useShader("vertex.GLSL", "frag.GLSL");
+	mars.useShader("vertex.GLSL", "phongFrag.GLSL");
 
 	Sphere jupiter(jupiterRadius, 50, 50, jupiterPath);
 	jupiter.useShader("vertex.GLSL", "phongFrag.GLSL");
 
 	Sphere saturn(saturnRadius, 50, 50, saturnPath);
-	saturn.useShader("vertex.GLSL", "frag.GLSL");
+	saturn.useShader("vertex.GLSL", "phongFrag.GLSL");
 
 	Sphere uranus(uranusRadius, 50, 50, uranusPath);
-	uranus.useShader("vertex.GLSL", "frag.GLSL");
+	uranus.useShader("vertex.GLSL", "phongFrag.GLSL");
 
 	Sphere neptune(neptuneRadius, 50, 50, neptunePath);
-	neptune.useShader("vertex.GLSL", "frag.GLSL");
+	neptune.useShader("vertex.GLSL", "phongFrag.GLSL");
 
 	Sphere box(boxRadius, 50, 50, boxPath);
 	box.useShader("vertex.GLSL", "frag.GLSL");
@@ -254,7 +254,7 @@ int main()
 
 	// Saturn (and possibly uranus too) rings
 	Ring satRings(saturnRadius + 9.8f, 50, 50, saturnRingPath); //9,8 a mais, de acordo com as minhas contas
-	satRings.useShader("vertex.GLSL", "frag.GLSL");
+	satRings.useShader("vertex.GLSL", "phongFrag.GLSL");
 
 	satRings.shift(0.0f, 0.0f, 1430.0f / distanceSunScale + sunRadius + saturnRadius);
 	satRings.rotate(-26.7f - 60.0f);
