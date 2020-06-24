@@ -15,7 +15,7 @@ void main () {
     FragColor = vec4(1,0,0,1);
     
     //ambient
-    const vec3 AmbientColor = vec3(0.1, 0.1, 0.1);
+    const vec3 AmbientColor = vec3(0.0, 0.0, 0.0);
 
     //diffuse
     const vec3 DiffuseColor = vec3(1.0, 1.0, 1.0);

@@ -173,7 +173,7 @@ int main()
 	mars.useShader("vertex.GLSL", "frag.GLSL");
 
 	Sphere jupiter(jupiterRadius, 50, 50, jupiterPath);
-	jupiter.useShader("vertex.GLSL", "frag.GLSL");
+	jupiter.useShader("vertex.GLSL", "phongFrag.GLSL");
 
 	Sphere saturn(saturnRadius, 50, 50, saturnPath);
 	saturn.useShader("vertex.GLSL", "frag.GLSL");
