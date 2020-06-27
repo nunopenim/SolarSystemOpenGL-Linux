@@ -154,7 +154,7 @@ int main()
 	
 
 	Sphere sun(sunRadius, 50, 50, sunPath);
-	sun.useShader("vertex.GLSL", "frag.GLSL");
+	sun.useShader("vertex.GLSL", "frag.GLSL"); //O sol usa o shader antigo, com iluminação a 100%
 
 	Sphere mercury(mercuryRadius, 50, 50, mercuryPath);
 	mercury.useShader("vertex.GLSL", "phongFrag.GLSL");
@@ -184,7 +184,7 @@ int main()
 	neptune.useShader("vertex.GLSL", "phongFrag.GLSL");
 
 	Sphere box(boxRadius, 50, 50, boxPath);
-	box.useShader("vertex.GLSL", "frag.GLSL");
+	box.useShader("vertex.GLSL", "frag.GLSL"); //a skybox usa o shader antigo com iluminação a 100 para se ver bem o céu
 	box.shift(0.0f, 0.0f, 0.0f);
 	box.rotate(0.0f);
 
@@ -313,6 +313,7 @@ void processInput(GLFWwindow* window)
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera.ProcessKeyboard(RIGHT, deltaTime * speed);
 
+	//limites para não sair da skybox
 	if (camera.Position.x > skyLimit) {
 		camera.Position.x = skyLimit;
 	}
