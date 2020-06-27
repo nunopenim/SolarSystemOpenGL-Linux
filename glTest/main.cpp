@@ -266,10 +266,6 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_2D);
 	while (!glfwWindowShouldClose(window)) {
-		glm::vec3 lightPos = glm::vec3(0.0f, 1.0f, 0.0f);
-		
-		glUniform3f(glGetUniformLocation(jupiter.shader.ID,"rotationS"), lightPos.x, lightPos.y, lightPos.z);
-
 		float currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
