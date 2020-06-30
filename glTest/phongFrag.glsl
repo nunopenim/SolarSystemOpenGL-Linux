@@ -29,5 +29,7 @@ void main () {
     vec3 reflectDir = reflect(-normalized_lightDir, normalized_normal);  
     float spec = pow(max(dot(vec3(0.0,0.0,0.0), reflectDir), 0.0), 32);
     vec3 specular = specularStrength * spec * vec3(1.0, 1.0, 1.0);
+
+    //final
     FragColor = texture(texturePlanet, st) * vec4(AmbientColor + DiffuseColor * DiffuseTerm, 1.0);
 }
