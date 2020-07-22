@@ -13,7 +13,7 @@ C++ and GLSL are the main programming languages of this project.
 
 The following guide is for Ubuntu 18.04 (possibly 20.04) and it's variants (Xubuntu, Lubuntu, etc...)
 
-First make sure that you have OpenGL, GLEW, GLFW3, GLM installed. To install them, run the following command:
+First make sure that you have all the required dependencies installed. To install them, run the following command:
 
 `sudo apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev libglfw3 libglfw3-dev libglew-dev libglm-dev libsdl2-dev binutils-gold g++ mesa-common-dev build-essential libglew1.5-dev libglm-dev `
 
