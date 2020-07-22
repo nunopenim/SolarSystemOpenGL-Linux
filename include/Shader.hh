@@ -1,16 +1,17 @@
 #ifndef SHADER_H
 #define SHADER_H
 
+// Main imports
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <iostream>
 
+// GLEW/GLFW stuff
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-
-// Include GLM
+// GLM Stuff
 #include <glm/glm.hpp>
 #include "glm/gtc/matrix_transform.hpp"
 #include <glm/gtc/type_ptr.hpp>
@@ -23,7 +24,6 @@ public:
 
     }
     // constructor generates the shader on the fly
-    // ------------------------------------------------------------------------
     Shader(const char* vertexPath, const char* fragmentPath)
     {
         // 1. retrieve the vertex/fragment source code from filePath
@@ -80,92 +80,79 @@ public:
 
     }
     // activate the shader
-    // ------------------------------------------------------------------------
     void use() const
     {
         glUseProgram(ID);
     }
     // utility uniform functions
-    // ------------------------------------------------------------------------
     void setBool(const std::string &name, bool value) const
     {
         glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value);
     }
-    // ------------------------------------------------------------------------
+    
     void setInt(const std::string &name, int value) const
     {
         glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
     }
-    // ------------------------------------------------------------------------
+    
     void setFloat(const std::string &name, float value) const
     {
         glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
     }
-    // ------------------------------------------------------------------------
+    
     void setVec2(const std::string &name, const glm::vec2 &value) const
     {
         glUniform2fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
     }
+    
     void setVec2(const std::string &name, float x, float y) const
     {
         glUniform2f(glGetUniformLocation(ID, name.c_str()), x, y);
     }
-    // ------------------------------------------------------------------------
+    
     void setVec3(const std::string &name, const glm::vec3 &value) const
     {
         glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
     }
+    
     void setVec3(const std::string &name, float x, float y, float z) const
     {
         glUniform3f(glGetUniformLocation(ID, name.c_str()), x, y, z);
     }
-    // ------------------------------------------------------------------------
+    
     void setVec4(const std::string &name, const glm::vec4 &value) const
     {
         glUniform4fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
     }
+    
     void setVec4(const std::string &name, float x, float y, float z, float w) const
     {
         glUniform4f(glGetUniformLocation(ID, name.c_str()), x, y, z, w);
     }
-    // ------------------------------------------------------------------------
+    
     void setMat2(const std::string &name, const glm::mat2 &mat) const
     {
         glUniformMatrix2fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
     }
-    // ------------------------------------------------------------------------
+    
     void setMat3(const std::string &name, const glm::mat3 &mat) const
     {
         glUniformMatrix3fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
     }
-    // ------------------------------------------------------------------------
+    
     void setMat4(const std::string &name, const glm::mat4 &mat) const
     {
         glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
     }
+    
     void update(glm::mat4 model, glm::mat4 view, glm::mat4 projection) {
-        
-
-        // retrieve the matrix uniform locations
-        //unsigned int modelLoc = glGetUniformLocation(ourShader.ID, "model");
-        //unsigned int viewLoc = glGetUniformLocation(ourShader.ID, "view");
-
-        // pass them to the shaders (3 different ways)
-        //glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-        //glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
-
-        
-        this->setMat4("model", model);
+		this->setMat4("model", model);
         this->setMat4("view", view);
-
-        // note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
         this->setMat4("projection", projection);
-        
     }
 
 private:
     // utility function for checking shader compilation/linking errors.
-    // ------------------------------------------------------------------------
     void checkCompileErrors(GLuint shader, std::string type)
     {
         GLint success;
