@@ -1,6 +1,7 @@
 # SolarSystemOpenGL
 
 Nuno Penim, 2020
+> Licensed under the DBAD Public License
 
 Graphical Computing Final project.
 
