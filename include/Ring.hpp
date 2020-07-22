@@ -1,12 +1,16 @@
+// General Stuff
 #include <iostream>
-#include "Shader.hh"
-#include "global.h"
-#include "camera.hpp"
-#include "glm/gtx/rotate_vector.hpp"
-
 #include <math.h>
 
-# define M_PI 3.14159265358979323846 //jesus fuck paulo, era necessario?
+// GLM Stuff
+#include "glm/gtx/rotate_vector.hpp"
+
+// My stuff
+#include "Shader.hh"
+#include "global.h"
+#include "Camera.hpp"
+
+# define M_PI 3.14159265358979323846
 
 class Ring {
 public:
@@ -46,7 +50,7 @@ public:
             {
                 stackAngle = PI / 2 - i * stackStep;        // starting from pi/2 to -pi/2
                 xy = radius * cosf(stackAngle);             // r * cos(u)
-                z = 0;
+                z = 0; // The ring is essentially a squished circled
 
                 // add (sectorCount+1) vertices per stack
                 // the first and last vertices have same position and normal, but different tex coords
@@ -209,23 +213,20 @@ public:
         glm::mat4 view = glm::mat4(1.0f);
         glm::mat4 projection = glm::mat4(1.0f);
 
-        //this-> modelVec = glm::vec3(0.0f, 1.0f, 0.0f);
-        //this-> moveTo = glm::vec3(0.0f, 0.0f, 5.0f);
-
         if (secondOrbit != 0) {
-            model = glm::rotate(model, (float)glfwGetTime() * glm::radians(orbitS), glm::vec3(0.0f, 1.0f, 0.0f))//anos sol
-                * glm::translate(model, this->moveTo)//distancia ao sol
-                * glm::rotate(model, (float)glfwGetTime() * glm::radians(secondOrbit - orbitS), glm::vec3(0.0f, 1.0f, 0.0f)) //anos planeta principal
-                * glm::translate(model, this->secondModelVec) //distancia ao planeta principal
-                * glm::rotate(model, glm::radians(angle), glm::vec3(-1.0f, 0.0f, 0.0f)) //angulo
-                * glm::rotate(model, (float)glfwGetTime() * glm::radians(rotationS - secondOrbit), glm::vec3(0.0f, 1.0f, 0.0f)); //dias
+            model = glm::rotate(model, (float)glfwGetTime() * glm::radians(orbitS), glm::vec3(0.0f, 1.0f, 0.0f))// Sun years
+                * glm::translate(model, this->moveTo)// Sun distance
+                * glm::rotate(model, (float)glfwGetTime() * glm::radians(secondOrbit - orbitS), glm::vec3(0.0f, 1.0f, 0.0f)) // Main planet years
+                * glm::translate(model, this->secondModelVec) // distance of main planet
+                * glm::rotate(model, glm::radians(angle), glm::vec3(-1.0f, 0.0f, 0.0f)) // angle
+                * glm::rotate(model, (float)glfwGetTime() * glm::radians(rotationS - secondOrbit), glm::vec3(0.0f, 1.0f, 0.0f)); // days
         }
         else {
-            model = glm::rotate(model, (float)glfwGetTime() * glm::radians(orbitS), glm::vec3(0.0f, 1.0f, 0.0f)) //anos
-                * glm::translate(model, this->moveTo) //distancia ao sol
-                * glm::rotate(model, (float)glfwGetTime() * glm::radians(-orbitS), glm::vec3(0.0f, 1.0f, 0.0f)) //estações
-                * glm::rotate(model, glm::radians(angle), glm::vec3(-1.0f, 0.0f, 0.0f)) // angulo
-                * glm::rotate(model, (float)glfwGetTime() * glm::radians(rotationS), glm::vec3(0.0f, 1.0f, 0.0f)); //dias
+            model = glm::rotate(model, (float)glfwGetTime() * glm::radians(orbitS), glm::vec3(0.0f, 1.0f, 0.0f)) // years
+                * glm::translate(model, this->moveTo) // sun distance
+                * glm::rotate(model, (float)glfwGetTime() * glm::radians(-orbitS), glm::vec3(0.0f, 1.0f, 0.0f)) // seasons
+                * glm::rotate(model, glm::radians(angle), glm::vec3(-1.0f, 0.0f, 0.0f)) // angle
+                * glm::rotate(model, (float)glfwGetTime() * glm::radians(rotationS), glm::vec3(0.0f, 1.0f, 0.0f)); // days
         }
 
         view = camera.GetViewMatrix();
@@ -246,11 +247,6 @@ public:
         glBindVertexArray(cubeVAO);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cubeVBO);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cubeEBO);
-
-        //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-        //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-        //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
         // when texture area is large, bilinear filter the original
         glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
