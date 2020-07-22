@@ -5,7 +5,7 @@
 
 // My stuff (mostly)
 #define STB_IMAGE_IMPLEMENTATION
-#include "include/stb_image.h"
+#include "include/stb_image.h" // not mine
 #include "include/camera.hpp"
 #include "include/Sphere.hpp"
 #include "include/Ring.hpp"
@@ -182,7 +182,7 @@ int main()
 	neptune.useShader(vertexPath, lightFragPath);
 
 	Sphere box(boxRadius, 50, 50, boxPath);
-	box.useShader(vertexPath, fragPath); //a skybox usa o shader antigo com iluminação a 100 para se ver bem o céu
+	box.useShader(vertexPath, fragPath); // The skybox uses the older shader with 100% light
 	box.shift(0.0f, 0.0f, 0.0f);
 	box.rotate(0.0f);
 
@@ -250,7 +250,7 @@ int main()
 	spheres.push_back(box);
 
 	// Saturn (and possibly uranus too) rings
-	Ring satRings(saturnRadius + 9.8f, 50, 50, saturnRingPath); //9,8 a mais, de acordo com as minhas contas
+	Ring satRings(saturnRadius + 9.8f, 50, 50, saturnRingPath); //plus 9.8 units, according to my math.
 	satRings.useShader(vertexPath, lightFragPath);
 
 	satRings.shift(0.0f, 0.0f, 1430.0f / distanceSunScale + sunRadius + saturnRadius);
@@ -289,19 +289,22 @@ int main()
 	return 0;
 }
 
-// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-// ---------------------------------------------------------------------------------------------------------
+// input processor
 void processInput(GLFWwindow* window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 	int speed = 1;
+	
+	// Shift key for speeeeeed
 	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
 		speed = 10;
 	}
 	else {
 		speed = 1;
 	}
+	
+	// movement
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		camera.ProcessKeyboard(FORWARD, deltaTime * speed);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -311,7 +314,7 @@ void processInput(GLFWwindow* window)
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera.ProcessKeyboard(RIGHT, deltaTime * speed);
 
-	//limites para não sair da skybox
+	//limits so it doesnt get out of the skybox
 	if (camera.Position.x > skyLimit) {
 		camera.Position.x = skyLimit;
 	}
@@ -332,17 +335,12 @@ void processInput(GLFWwindow* window)
 	}
 }
 
-// glfw: whenever the window size changed (by OS or user resize) this callback function executes
-// ---------------------------------------------------------------------------------------------
+// glfw: window size stuff
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-	// make sure the viewport matches the new window dimensions; note that width and
-	// height will be significantly larger than specified on retina displays.
 	glViewport(0, 0, width, height);
 }
 
-// glfw: whenever the mouse moves, this callback is called
-// -------------------------------------------------------
+// glfw: mouse stuff
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
 	if (firstMouse)
@@ -351,22 +349,20 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 		lastY = ypos;
 		firstMouse = false;
 	}
-
 	float xoffset = xpos - lastX;
 	float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
-
 	lastX = xpos;
 	lastY = ypos;
-
 	camera.ProcessMouseMovement(xoffset, yoffset);
 }
 
-// glfw: whenever the mouse scroll wheel scrolls, this callback is called
-// ----------------------------------------------------------------------
+// glfw: scroll stuff (not used I think, but if it ain't broken...)
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
 	camera.ProcessMouseScroll(yoffset);
 }
+
+// auxiliary functions, if it gets messy, consider a separate file.
 float timeToSeconds(float days, float hours, float minutes, float seconds) {
 	hours = hours + days * 24;
 	minutes = minutes + hours * 60;
