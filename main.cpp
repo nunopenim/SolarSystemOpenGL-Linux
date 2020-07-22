@@ -1,38 +1,54 @@
+// General includes
 #include <iostream>
 #include <vector>
 #include <algorithm>
 
+// My stuff (mostly)
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "include/stb_image.h"
+#include "include/camera.hpp"
+#include "include/Sphere.hpp"
+#include "include/Ring.hpp"
+#include "include/Shader.hh" // not made by me
+#include "include/global.h"
 
-#include "camera.hpp"
-#include "Sphere.hpp"
-#include "Ring.hpp"
-
-
-#include "Shader.hh"
-#include "global.h"
-
-
-
+// Some functions
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 float timeToSeconds(float days, float hours, float minutes, float seconds);
 
-// timing
+// Timing
 float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
 
 // camera
-
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
 
-float scale = 1.0f;
+// Textures
+const char* sunPath = "textures/sun.jpg";
+const char* mercuryPath = "textures/mercury.jpg";
+const char* venusPath = "textures/venus.jpg";
+const char* earthPath = "textures/earth.jpg";
+const char* moonPath = "textures/moon.jpg";
+const char* marsPath = "textures/mars.jpg";
+const char* jupiterPath = "textures/jupiter.jpg";
+const char* saturnPath = "textures/saturn.jpg";
+const char* uranusPath = "textures/uranus.jpg";
+const char* neptunePath = "textures/neptune.jpg";
+const char* saturnRingPath = "textures/ring.jpg";
+const char* boxPath = "textures/box.jpg"; // SkyBox limitation, uses a milky way texture
 
+// Shaders
+const char* vertexPath = "shaders/vertex.glsl";
+const char* fragPath = "shaders/fragment.glsl";
+const char* lightFragPath = "shaders/illuminated_fragment.glsl";
+
+// Misc
+float scale = 1.0f;
 float boxRadius = 700.0f * scale;
 float skyLimit = sqrt((boxRadius * boxRadius) / 2) - 5;
 
@@ -51,8 +67,7 @@ int main()
 
 
 	// Open a window and create its OpenGL context
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Solar System - Nuno Penim 21700874", NULL, NULL);
-	//GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "transf", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Solar System - Nuno Penim", NULL, NULL);
 	glfwMakeContextCurrent(window);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
@@ -68,7 +83,7 @@ int main()
 	//************************************************************
 	std::vector<Sphere> spheres;
 
-	std::vector<Ring> rings; //aneis dos planetas (saturno)
+	std::vector<Ring> rings; //planet rings (saturn)
 
 	//sun goes counter clock wise and so does the orbit of all planets
 	//planet orbit speed by order
@@ -121,10 +136,10 @@ int main()
 
 	float gasSpecial = 10.0f;
 
-	//escala reduzida a distanceSunScale * daySpeed vezes
+	//scale reduced to distanceSunScale * daySpeed times
 	float distanceSunScale = 10.0f;
 	float daySpeed = 1000000.0f;
-
+	
 	float sunRadius = 20.0f * scale;
 	float mercuryRadius = 0.4f * scale;
 	float venusRadius = 0.9f * scale;
@@ -136,53 +151,38 @@ int main()
 	float uranusRadius = 4.06f * scale;
 	float neptuneRadius = 3.88f * scale;
 
-	const char* sunPath = "textures/sun.jpg";
-	const char* mercuryPath = "textures/mercury.jpg";
-	const char* venusPath = "textures/venus.jpg";
-	const char* earthPath = "textures/earth.jpg";
-	const char* moonPath = "textures/moon.jpg";
-	const char* marsPath = "textures/mars.jpg";
-	const char* jupiterPath = "textures/jupiter.jpg";
-	const char* saturnPath = "textures/saturn.jpg";
-	const char* uranusPath = "textures/uranus.jpg";
-	const char* neptunePath = "textures/neptune.jpg";
-	const char* saturnRingPath = "textures/ring.jpg";
-
-	const char* boxPath = "textures/box.jpg";
-	
-
 	Sphere sun(sunRadius, 50, 50, sunPath);
-	sun.useShader("vertex.GLSL", "frag.GLSL"); //O sol usa o shader antigo, com iluminação a 100%
+	sun.useShader(vertexPath, fragPath); //The sun uses the old shader, with 100% lightning
 
 	Sphere mercury(mercuryRadius, 50, 50, mercuryPath);
-	mercury.useShader("vertex.GLSL", "phongFrag.GLSL");
+	mercury.useShader(vertexPath, lightFragPath);
 
 	Sphere venus(venusRadius, 50, 50, venusPath);
-	venus.useShader("vertex.GLSL", "phongFrag.GLSL");
+	venus.useShader(vertexPath, lightFragPath);
 
 	Sphere earth(earthRadius, 50, 50, earthPath);
-	earth.useShader("vertex.GLSL", "phongFrag.GLSL");
+	earth.useShader(vertexPath, lightFragPath);
 
 	Sphere moon(moonRadius, 50, 50, moonPath);
-	moon.useShader("vertex.GLSL", "phongFrag.GLSL");
+	moon.useShader(vertexPath, lightFragPath);
 	
 	Sphere mars(marsRadius, 50, 50, marsPath);
-	mars.useShader("vertex.GLSL", "phongFrag.GLSL");
+	mars.useShader(vertexPath, lightFragPath);
 
 	Sphere jupiter(jupiterRadius, 50, 50, jupiterPath);
-	jupiter.useShader("vertex.GLSL", "phongFrag.GLSL");
+	jupiter.useShader(vertexPath, lightFragPath);
 
 	Sphere saturn(saturnRadius, 50, 50, saturnPath);
-	saturn.useShader("vertex.GLSL", "phongFrag.GLSL");
+	saturn.useShader(vertexPath, lightFragPath);
 
 	Sphere uranus(uranusRadius, 50, 50, uranusPath);
-	uranus.useShader("vertex.GLSL", "phongFrag.GLSL");
+	uranus.useShader(vertexPath, lightFragPath);
 
 	Sphere neptune(neptuneRadius, 50, 50, neptunePath);
-	neptune.useShader("vertex.GLSL", "phongFrag.GLSL");
+	neptune.useShader(vertexPath, lightFragPath);
 
 	Sphere box(boxRadius, 50, 50, boxPath);
-	box.useShader("vertex.GLSL", "frag.GLSL"); //a skybox usa o shader antigo com iluminação a 100 para se ver bem o céu
+	box.useShader(vertexPath, fragPath); //a skybox usa o shader antigo com iluminação a 100 para se ver bem o céu
 	box.shift(0.0f, 0.0f, 0.0f);
 	box.rotate(0.0f);
 
@@ -251,7 +251,7 @@ int main()
 
 	// Saturn (and possibly uranus too) rings
 	Ring satRings(saturnRadius + 9.8f, 50, 50, saturnRingPath); //9,8 a mais, de acordo com as minhas contas
-	satRings.useShader("vertex.GLSL", "phongFrag.GLSL");
+	satRings.useShader(vertexPath, lightFragPath);
 
 	satRings.shift(0.0f, 0.0f, 1430.0f / distanceSunScale + sunRadius + saturnRadius);
 	satRings.rotate(-26.7f - 60.0f);
