@@ -6,7 +6,7 @@
 // My stuff (mostly)
 #define STB_IMAGE_IMPLEMENTATION
 #include "include/stb_image.h" // not mine
-#include "include/camera.hpp"
+#include "include/Camera.hpp"
 #include "include/Sphere.hpp"
 #include "include/Ring.hpp"
 #include "include/Shader.hh" // not made by me
@@ -336,7 +336,7 @@ void processInput(GLFWwindow* window)
 }
 
 // glfw: window size stuff
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+void framebuffer_size_callback(GLFWwindow* window, int width, int height){
 	glViewport(0, 0, width, height);
 }
 
