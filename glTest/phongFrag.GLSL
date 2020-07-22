@@ -1,6 +1,4 @@
 #version 330 core
-
-
 uniform sampler2D texturePlanet;
 in vec3 interpolatedNormal;
 in vec2 st;
@@ -33,3 +31,4 @@ void main () {
     //final
     FragColor = texture(texturePlanet, st) * vec4(AmbientColor + DiffuseColor * DiffuseTerm, 1.0);
 }
+

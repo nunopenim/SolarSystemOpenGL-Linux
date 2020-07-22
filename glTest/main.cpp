@@ -1,6 +1,4 @@
 #include <iostream>
-#include <Windows.h>
-
 #include <vector>
 #include <algorithm>
 
@@ -53,7 +51,7 @@ int main()
 
 
 	// Open a window and create its OpenGL context
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Solar System - Nuno Penim 21700874 e Paulo Oliveira 21802287", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Solar System - Nuno Penim 21700874", NULL, NULL);
 	//GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "transf", NULL, NULL);
 	glfwMakeContextCurrent(window);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);

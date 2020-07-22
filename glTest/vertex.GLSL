@@ -25,3 +25,4 @@ void main()
 
     lightPos = vec3(view * vec4(lightLocation, 1.0));
 }
+
