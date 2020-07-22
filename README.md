@@ -25,3 +25,7 @@ This will create an executable named solarSystem in the main directory. The fina
 `./solarSystem`
 
 Now, wait, as depending on your machine it can take a bit to open. Use WASD to move, the mouse to look around and shift key to move faster. The camera is above the sun, so if you only see stars, look down first to see the sun, then you can locate the planets! Have fun :)
+
+## Notes for self
+
+Missing Makefile!
