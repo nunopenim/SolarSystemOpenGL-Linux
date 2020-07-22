@@ -1,8 +1,15 @@
+// General Stuff
 #include <iostream>
+#include <math.h>
+
+// GLM Stuff
+#include "glm/gtx/rotate_vector.hpp"
+
+// My stuff
 #include "Shader.hh"
 #include "global.h"
-#include "camera.hpp"
-#include "glm/gtx/rotate_vector.hpp"
+#include "Camera.hpp"
+
 # define M_PI 3.14159265358979323846
 
 const unsigned int SCR_WIDTH = 800;
@@ -197,29 +204,25 @@ class Sphere {
     }
     
     void update() {
-
         glm::mat4 model = glm::mat4(1.0f);
         glm::mat4 view = glm::mat4(1.0f);
         glm::mat4 projection = glm::mat4(1.0f);
 
-        //this-> modelVec = glm::vec3(0.0f, 1.0f, 0.0f);
-        //this-> moveTo = glm::vec3(0.0f, 0.0f, 5.0f);
-
         if (secondOrbit != 0) {
-            model = glm::rotate(model, (float)glfwGetTime() * glm::radians(orbitS), glm::vec3(0.0f, 1.0f, 0.0f))//anos sol
-                * glm::translate(model, this->moveTo)//distancia ao sol
-                * glm::rotate(model, (float)glfwGetTime() * glm::radians(secondOrbit - orbitS), glm::vec3(0.0f, 1.0f, 0.0f)) //anos planeta principal
-                * glm::translate(model, this->secondModelVec) //distancia ao planeta principal
-                * glm::rotate(model, glm::radians(angle), glm::vec3(-1.0f, 0.0f, 0.0f)) //angulo
-                * glm::rotate(model, (float)glfwGetTime() * glm::radians(rotationS - secondOrbit), glm::vec3(0.0f, 1.0f, 0.0f)) //dias
-                * glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f)); //texture flip
+            model = glm::rotate(model, (float)glfwGetTime() * glm::radians(orbitS), glm::vec3(0.0f, 1.0f, 0.0f))// sun years
+                * glm::translate(model, this->moveTo)// sun distance
+                * glm::rotate(model, (float)glfwGetTime() * glm::radians(secondOrbit - orbitS), glm::vec3(0.0f, 1.0f, 0.0f)) // main planet years
+                * glm::translate(model, this->secondModelVec) // distance to main planet
+                * glm::rotate(model, glm::radians(angle), glm::vec3(-1.0f, 0.0f, 0.0f)) // angle
+                * glm::rotate(model, (float)glfwGetTime() * glm::radians(rotationS - secondOrbit), glm::vec3(0.0f, 1.0f, 0.0f)) // days
+                * glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f)); // texture flip
         }
         else {
-            model = glm::rotate(model, (float)glfwGetTime() * glm::radians(orbitS), glm::vec3(0.0f, 1.0f, 0.0f)) //anos
-                * glm::translate(model, this->moveTo) //distancia ao sol
-                * glm::rotate(model, (float)glfwGetTime() * glm::radians(-orbitS), glm::vec3(0.0f, 1.0f, 0.0f)) //estações
-                * glm::rotate(model, glm::radians(angle), glm::vec3(-1.0f, 0.0f, 0.0f)) // angulo
-                * glm::rotate(model, (float)glfwGetTime() * glm::radians(rotationS), glm::vec3(0.0f, 1.0f, 0.0f)) //dias
+            model = glm::rotate(model, (float)glfwGetTime() * glm::radians(orbitS), glm::vec3(0.0f, 1.0f, 0.0f)) //years
+                * glm::translate(model, this->moveTo) // sun distance
+                * glm::rotate(model, (float)glfwGetTime() * glm::radians(-orbitS), glm::vec3(0.0f, 1.0f, 0.0f)) // seasons
+                * glm::rotate(model, glm::radians(angle), glm::vec3(-1.0f, 0.0f, 0.0f)) // angle
+                * glm::rotate(model, (float)glfwGetTime() * glm::radians(rotationS), glm::vec3(0.0f, 1.0f, 0.0f)) // days
                 * glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f)); //texture flip
         }
         
@@ -230,10 +233,7 @@ class Sphere {
         shader.setMat4("view", view);
         shader.setMat4("projection", projection);
 
-        glDrawElements(GL_TRIANGLES,
-            indices.size(),          
-            GL_UNSIGNED_INT,                 
-            (void*)0);
+        glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (void*)0);
     }
 
     void draw() {
@@ -243,8 +243,6 @@ class Sphere {
         glBindVertexArray(cubeVAO);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cubeVBO);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cubeEBO);
-
-        // when texture area is large, bilinear filter the original
         glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
         glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
         glEnable(GL_TEXTURE_GEN_S);
