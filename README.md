@@ -29,7 +29,7 @@ To build the executable file, just type:
 
 `make build`
 
-This will not run automatically the program. Like this, you can afterwards run it via `make run`, or transfer to another machine and execute it there. The executable file is named `solarSystem`.
+This will not run automatically the program. Like this, you can afterwards run it via `./solarSystem`, or transfer to another machine and execute it there, and use the same command. The executable file is named `solarSystem`.
 
 There is also a rule in the Makefile to clean the output of the compilation, for a clean build:
 

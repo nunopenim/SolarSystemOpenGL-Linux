@@ -13,12 +13,12 @@ OBJ1 = main.cpp
 
 OBJ1_EXEC = solarSystem
 
-all: build run
+all:
+	$(CC) $(OBJ1) -o $(OBJ1_EXEC) $(GLFLAGS)
+	./solarSystem
 
 build:
 	$(CC) $(OBJ1) -o $(OBJ1_EXEC) $(GLFLAGS)
-run:
-	./solarSystem
 
 clean:
 	rm -rf solarSystem
