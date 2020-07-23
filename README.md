@@ -55,6 +55,6 @@ Contributions are also welcome, be it in a text idea, which I consider a suggest
 
 The project is licensed under the DBADPL-B (Don't Be A Dick Public License B) . It means you can use it for whatever you want, the way you want, however if little or no changes were made, I appreciate credits.
 
-Using it for educational or demonstration purposes is welcome and more than allowed (actually a bit flattering) too! So feel free to use it.
+Using it for educational or demonstration purposes is welcome and more than allowed (actually a bit flattering too!). So feel free to use it.
 
 If however you use this for any commercial purpose and get rich out of it, I would appreciate a beer or a pizza too, as it is explained in the license file. Thanks for understanding and enjoy the project!
