@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#define GLM_ENABLE_EXPERIMENTAL
 
 // My stuff (mostly)
 #define STB_IMAGE_IMPLEMENTATION
