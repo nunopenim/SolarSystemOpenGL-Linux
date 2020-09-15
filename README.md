@@ -11,7 +11,7 @@ C++ and GLSL are the main programming languages of this project.
 
 ## How to render
 
-The following guide is for Ubuntu 18.04 (possibly 20.04) and it's variants (Xubuntu, Lubuntu, etc...)
+The following guide is for Ubuntu 18.04 (possibly 20.04) and it's variants (Xubuntu, Lubuntu, etc...). There is also a [Windows version](https://github.com/nunopenim/SolarSystemOpenGL-Windows), that requires Visual Studio 2019 (Community Edition is fine and enough!)
 
 First make sure that you have all the required dependencies installed. To install them, run the following command:
 
