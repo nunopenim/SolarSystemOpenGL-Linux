@@ -3,7 +3,7 @@
 # Makefile to be used in the SolarSystemOpenGL project
 # Can be easily modified for other projects.
 #
-# Like everything in this project, Licensed under DBAD Public License
+# Like everything in this project, Licensed under DBADPL-B
 
 CC = g++
 
