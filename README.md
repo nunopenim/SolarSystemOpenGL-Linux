@@ -17,6 +17,8 @@ First make sure that you have all the required dependencies installed. To instal
 
 `sudo apt-get install make libglu1-mesa-dev freeglut3-dev mesa-common-dev libglfw3 libglfw3-dev libglew-dev libglm-dev libsdl2-dev binutils-gold g++ mesa-common-dev build-essential libglew1.5-dev libglm-dev `
 
+(For Arch Linux, run `sudo pacman -Syu make glu freeglut glfw glew glm sdl2 binutils gcc-multilib mesa`, you might also need `base-devel`, if you don't have it installed)
+
 Secondly, compile! To do such, on the top of the directory, type:
 
 `make`
