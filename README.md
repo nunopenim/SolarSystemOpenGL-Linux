@@ -9,6 +9,8 @@ Planets and sun are not to real scale or distances. Rendering distance would nee
 
 C++ and GLSL are the main programming languages of this project.
 
+![](img/screencap.png)
+
 ## How to render
 
 The following guide is for Ubuntu 18.04 (possibly 20.04) and it's variants (Xubuntu, Lubuntu, etc...). There are also a [Windows version](https://github.com/nunopenim/SolarSystemOpenGL-Windows), and a [macOS version](https://github.com/nunopenim/SolarSystemOpenGL-macOS) of the project.
